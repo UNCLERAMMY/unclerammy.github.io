@@ -1,15 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unclerammy</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- Monetag verification meta (from your account) -->
+  <meta name="monetag" content="9207b5119ab78aac4319e40d8026b6c4">
+
+  <title>Unclerammy — Monetag test</title>
+
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.4;margin:0;padding:24px;background:#f7f7f7}
+    .card{max-width:900px;margin:24px auto;padding:18px;background:#fff;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    h1{margin:0 0 8px;font-size:28px}
+    p{margin:6px 0;color:#333}
+    .ad-placeholder{margin-top:20px;padding:14px;border:2px dashed #8a8a8a;border-radius:6px;text-align:center;background:#fcfcfc}
+    .ad-placeholder strong{display:block;margin-bottom:6px}
+  </style>
 </head>
 <body>
-  <h1>Welcome to Unclerammy</h1>
-  <p>This is my website running on GitHub Pages with Monetag ads.</p>
+  <div class="card">
+    <h1>Welcome — Monetag test page</h1>
+    <p>This page contains your Monetag verification meta and the Monetag ad script. If Monetag serves an ad for your zone, you may see a banner/pop-under (depends on Monetag settings).</p>
 
-  <!-- Monetag installation code -->
-  <script src="https://fpyf8.com/88/tag.min.js" data-zone="174139" async data-cfasync="false"></script>
+    <!-- Visible placeholder so you know script loaded -->
+    <div class="ad-placeholder" id="ad-check">
+      <strong>Ad placeholder</strong>
+      <span id="ad-status">Checking Monetag script…</span>
+    </div>
+  </div>
+
+  <!-- Monetag install script you were given -->
+  <script src="https://fpyf8.com/88/tag.min.js"
+          data-zone="174139"
+          async
+          data-cfasync="false"></script>
+
+  <!-- Small script to detect if monetag script element loaded (not full proof of ads) -->
+  <script>
+    (function(){
+      // detect the monetag script element by src
+      var found = false;
+      var scripts = document.getElementsByTagName('script');
+      for(var i=0;i<scripts.length;i++){
+        if(scripts[i].src && scripts[i].src.indexOf('fpyf8.com/88/tag.min.js') !== -1){
+          found = true;
+          break;
+        }
+      }
+      var s = document.getElementById('ad-status');
+      if(found){
+        s.textContent = 'Monetag script is present on the page. Ads may be served in a few minutes.';
+      } else {
+        s.textContent = 'Monetag script NOT found. Check that you saved the script exactly as provided.';
+      }
+    })();
+  </script>
 </body>
 </html>
